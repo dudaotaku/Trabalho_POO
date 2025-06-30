@@ -1,10 +1,13 @@
 package org.example;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.util.Formatter;
 import java.util.Scanner;
 
 
 public class VendaIngresso {
 
-    public void ingresso(Sessao sessao, Pagamento pagamento, Ingresso ingresso){
+    public void ingresso(Sessao sessao, Pagamento pagamento, Ingresso ingresso, Pessoa usuario){
         Scanner s = new Scanner(System.in);
         int op1;
 
@@ -49,13 +52,13 @@ public class VendaIngresso {
                     System.out.println("Opção inválida!");
                     continue;
             }
-            resumoCom(sessao,ingresso,pagamento, valorFinal);
+            resumoCom(sessao,ingresso,pagamento, valorFinal, usuario);
             break;
 
         } while(op1 != 0);
     }
 
-    public void resumoCom(Sessao sessao, Ingresso ingresso, Pagamento pagamento, double valorFinal){
+    public void resumoCom(Sessao sessao, Ingresso ingresso, Pagamento pagamento, double valorFinal, Pessoa usuario){
         System.out.println("\n------------------------------RESUMO DA CONTA---------------------------");
         System.out.println("Filme: " + sessao.getTitulo());
         System.out.println("Horário: " + sessao.getHorario());
@@ -63,6 +66,45 @@ public class VendaIngresso {
         System.out.println("Qtd de ingressos: " + ingresso.getQtdIngresso());
         System.out.println("Forma de pagamento: " + pagamento.getForma());
         System.out.printf("Total pago: R$%.2f\n", valorFinal);
+
+        try (
+                FileWriter arquivo = new FileWriter("ingresso.txt");
+                PrintWriter pw = new PrintWriter(arquivo);
+        ) {
+            Formatter formatter = new Formatter(pw);
+
+            formatter.format(
+                    "=============================%n" +
+                            "         INGRESSO           %n" +
+                            "=============================%n" +
+                            "Filme: %s%n" +
+                            "Horário: %s%n" +
+                            "Sala: %s%n" +
+                            "Quantidade: %d%n" +
+                            "Forma de pagamento: %s%n" +
+                            "Valor total: R$ %.2f%n" +
+                            "-----------------------------%n" +
+                            "Cliente: %s%n" +
+                            "Email: %s%n" +
+                            "CPF: %s%n" +
+                            "=============================%n",
+                    sessao.getTitulo(),
+                    sessao.getHorario(),
+                    sessao.getSala(),
+                    ingresso.getQtdIngresso(),
+                    pagamento.getForma(),
+                    valorFinal,
+                    usuario.getNome(),
+                    usuario.getEmail(),
+                    usuario.getCpf()
+            );
+
+            formatter.flush();
+            System.out.println("Ingresso gerado com sucesso!");
+        } catch (Exception e) {
+            System.out.println("Erro ao gerar arquivo: " + e.getMessage());
+        }
+
     }
 
 }

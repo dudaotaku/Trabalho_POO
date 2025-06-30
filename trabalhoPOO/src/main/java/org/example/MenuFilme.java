@@ -4,9 +4,8 @@ import java.util.*;
 
 public class MenuFilme {
 
-    public void exibirMenuFilmes(Scanner scanner, SessoesService sessoesService) {
+    public void exibirMenuFilmes(Scanner scanner, SessoesService sessoesService, Pessoa usuario) {
         List<Sessao> todasSessoes = sessoesService.getSessao();
-
         // Cria uma lista de títulos únicos de filmes
         Set<String> titulosUnicos = new HashSet<>();
         for (Sessao s : todasSessoes) {
@@ -27,19 +26,24 @@ public class MenuFilme {
             escolha = scanner.nextInt();
             scanner.nextLine();
 
-            if (escolha > 0 && escolha <= listaTitulos.size()) {
-                String filmeSelecionado = listaTitulos.get(escolha - 1);
-                exibirInfo(filmeSelecionado, todasSessoes);
+            try {
+                if (escolha > 0 && escolha <= listaTitulos.size()) {
+                    String filmeSelecionado = listaTitulos.get(escolha - 1);
+                    exibirInfo(filmeSelecionado, todasSessoes);
 
-                System.out.print("Deseja ver as sessões disponíveis para esse filme? (s/n): ");
-                resposta = scanner.nextLine();
+                    System.out.print("Deseja ver as sessões disponíveis para esse filme? (s/n): ");
+                    resposta = scanner.nextLine();
 
-                if (resposta.equalsIgnoreCase("s")) {
-                    exibirSessoesPorFilme(scanner, filmeSelecionado, todasSessoes, new Ingresso());
+                    if (resposta.equalsIgnoreCase("s")) {
+                        exibirSessoesPorFilme(scanner, filmeSelecionado, todasSessoes, new Ingresso(), usuario);
+                    }
+                } else if (escolha != 0) {
+                    throw new OpcaoInvalidaException("Opção inválida! Escolha fora do intervalo permitido.");
                 }
-            } else if (escolha != 0) {
-                System.out.println("Opção inválida!");
+            } catch (OpcaoInvalidaException e) {
+                System.out.println("Erro: " + e.getMessage());
             }
+
 
         } while (escolha != 0);
     }
@@ -55,27 +59,31 @@ public class MenuFilme {
         }
     }
 
-    private void exibirSessoesPorFilme(Scanner scanner, String titulo, List<Sessao> todasSessoes, Ingresso ingresso) {
+    private void exibirSessoesPorFilme(Scanner scanner, String titulo, List<Sessao> todasSessoes, Ingresso ingresso, Pessoa usuario) {
         int qtd;
         System.out.println("\n-----------------SESSÕES DISPONÍVEIS DO FILME" + titulo.toUpperCase() + "-------------------");
         VendaIngresso venda = new VendaIngresso();
         Pagamento pagamento = new Pagamento();
-        Menu menu = new Menu();
 
         //lista criada para filtrar as sessoes da lista sessoes para mostrar as opões
         List<Sessao> sessoesFiltradas = new ArrayList<>();
 
+        int contador = 1;
 
         //percorre as a lista sessoes identificando pelo titulo para filtrar as sessoes
         for (int i = 0; i< todasSessoes.size(); i++) {
             Sessao se = todasSessoes.get(i);
             if (se.getTitulo().equals(titulo)) {
-                System.out.println("(" + (i+1) + ") - Horário: " + se.getHorario() +
+                System.out.println("(" + contador + ") - Horário: " + se.getHorario() +
                         " | Sala: " + se.getSala() +
                         " | Preço: R$" + se.getPreco());
                 sessoesFiltradas.add(se); //adiciona a lista criada
+                contador++;
             }
         }
+
+
+
 
         //usado para verificar se a lista nao esta vazia
         if (sessoesFiltradas.isEmpty()) {
@@ -93,7 +101,7 @@ public class MenuFilme {
             qtd = scanner.nextInt();
             scanner.nextLine();
             ingresso.setQtdIngresso(qtd);
-            venda.ingresso(sessaoEscolhida, pagamento, ingresso);
+            venda.ingresso(sessaoEscolhida, pagamento, ingresso, usuario);
 
 
         } else if (opcao != 0) {

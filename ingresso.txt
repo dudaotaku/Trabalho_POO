@@ -1,0 +1,14 @@
+=============================
+         INGRESSO           
+=============================
+Filme: Lilo & Stitch
+Horário: 16:30
+Sala: 2B
+Quantidade: 2
+Forma de pagamento: pix
+Valor total: R$ 63,58
+-----------------------------
+Cliente: dfg
+Email: dhds
+CPF: fdhgdh
+=============================

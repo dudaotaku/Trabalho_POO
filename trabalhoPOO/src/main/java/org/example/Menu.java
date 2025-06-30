@@ -40,8 +40,8 @@ public class Menu {
                         }else{
                             break;
                         }
-                    }else{J
-                        menuFilme.exibirMenuFilmes(s, sessoesService);
+                    }else{
+                        menuFilme.exibirMenuFilmes(s, sessoesService, usuario);
                     }
                     break;
                 case 2:
