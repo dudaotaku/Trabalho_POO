@@ -1,8 +1,11 @@
 package org.example;
+import org.example.classe.Filme;
+
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
-public class FilmeService extends Filme{
+public class FilmeService extends Filme {
     public FilmeService(String titulo, String genero, String duracao, String classificacao) {
         super(titulo, genero, duracao, classificacao);
     }
@@ -16,6 +19,8 @@ public class FilmeService extends Filme{
         filmes.add(new Filme("Elio ", "Animação", "100 min", "Livre"));
         filmes.add(new Filme("Bailarina", "Ação", "125 min", "18 anos"));
         filmes.add(new Filme("Homem com h","Drama","130 min","16 anos"));
+
+        filmes.sort(Comparator.comparing(Filme::getTitulo));
         return filmes;
     }
 }

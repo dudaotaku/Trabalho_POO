@@ -1,14 +1,23 @@
-=============================
-         INGRESSO           
-=============================
-Filme: Lilo & Stitch
-Horário: 16:30
-Sala: 2B
-Quantidade: 2
-Forma de pagamento: pix
-Valor total: R$ 63,58
------------------------------
-Cliente: dfg
-Email: dhds
-CPF: fdhgdh
-=============================
+=============================================
+                Cinema OO
+       Cinema orientado a objeto ltda
+       CNPJ: 53.469.568/0001-12
+---------------------------------------------
+Endereço: Adriano Kormann, 510 - Bela vista
+Cidade: Gaspar - SC
+CEP: 89111-009
+=============================================
+                 INGRESSO                   
+=============================================
+Filme: Como Treinar o Seu Dragão
+Horário da Sessão: 16:15
+Sala: 3C
+Qtd ingressos: 6
+Forma de pagamento: dinheiro
+Valor total: R$ 190,74
+Data da compra: 03/07/2025 20:46:27
+---------------------------------------------
+Cliente: maria
+Email: 258
+CPF: 123654789
+=============================================

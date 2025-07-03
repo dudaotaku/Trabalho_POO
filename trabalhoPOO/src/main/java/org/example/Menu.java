@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.classe.Ingresso;
+
 import java.util.Scanner;
 
 public class Menu {

@@ -1,11 +1,17 @@
 package org.example;
+import org.example.classe.EnderecoEmpresa;
+import org.example.classe.Ingresso;
+
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.Formatter;
 import java.util.Scanner;
 
 
 public class VendaIngresso {
+    InfoEmpresa infoEmpresa = new InfoEmpresa();
+    EnderecoEmpresa enderecoEmpresa = new EnderecoEmpresa();
 
     public void ingresso(Sessao sessao, Pagamento pagamento, Ingresso ingresso, Pessoa usuario){
         Scanner s = new Scanner(System.in);
@@ -69,31 +75,55 @@ public class VendaIngresso {
 
         try (
                 FileWriter arquivo = new FileWriter("ingresso.txt");
-                PrintWriter pw = new PrintWriter(arquivo);
+                PrintWriter pw = new PrintWriter(arquivo)
         ) {
+            Date dataCompra = new Date();
+            String dataHoraCompra = FormatadorUtil.formatarData(dataCompra, "dd/MM/yyyy HH:mm:ss");
+
             Formatter formatter = new Formatter(pw);
 
             formatter.format(
-                    "=============================%n" +
-                            "         INGRESSO           %n" +
-                            "=============================%n" +
+                    "=============================================%n" +
+                            "                %s%n" +
+                            "       %s%n" +
+                            "       CNPJ: %s%n" +
+                            "---------------------------------------------%n" +
+                            "Endereço: %s, %d - %s%n" +
+                            "Cidade: %s - %s%n" +
+                            "CEP: %s%n" +
+                            "=============================================%n" +
+                            "                 INGRESSO                   %n" +
+                            "=============================================%n" +
                             "Filme: %s%n" +
-                            "Horário: %s%n" +
+                            "Horário da Sessão: %s%n" +
                             "Sala: %s%n" +
-                            "Quantidade: %d%n" +
+                            "Qtd ingressos: %d%n" +
                             "Forma de pagamento: %s%n" +
                             "Valor total: R$ %.2f%n" +
-                            "-----------------------------%n" +
+                            "Data da compra: %s%n" +
+                            "---------------------------------------------%n" +
                             "Cliente: %s%n" +
                             "Email: %s%n" +
                             "CPF: %s%n" +
-                            "=============================%n",
+                            "=============================================%n",
+                    // dados empresa
+                    infoEmpresa.getNomeFantasia(),
+                    infoEmpresa.getRazaoSocial(),
+                    infoEmpresa.getCnpj(),
+                    enderecoEmpresa.getRua(),
+                    enderecoEmpresa.getNumero(),
+                    enderecoEmpresa.getBairro(),
+                    enderecoEmpresa.getCidade(),
+                    enderecoEmpresa.getEstado(),
+                    enderecoEmpresa.getCep(),
+                    // dados ingresso
                     sessao.getTitulo(),
-                    sessao.getHorario(),
+                    sessao.getHorario().toString(),
                     sessao.getSala(),
                     ingresso.getQtdIngresso(),
                     pagamento.getForma(),
                     valorFinal,
+                    dataHoraCompra, // data/hora da compra
                     usuario.getNome(),
                     usuario.getEmail(),
                     usuario.getCpf()
@@ -104,6 +134,8 @@ public class VendaIngresso {
         } catch (Exception e) {
             System.out.println("Erro ao gerar arquivo: " + e.getMessage());
         }
+
+
 
     }
 

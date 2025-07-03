@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.classe.Ingresso;
+
 import java.util.*;
 
 public class MenuFilme {
@@ -18,6 +20,7 @@ public class MenuFilme {
         do {
             System.out.println("\n------------------------ FILMES EM EXIBIÇÃO ------------------------");
             List<String> listaTitulos = new ArrayList<>(titulosUnicos); // transforma em lista para acessar por índice
+            Collections.sort(listaTitulos);
             for (int i =0 ; i<listaTitulos.size();i++) {
                 System.out.println("("+ (i+1) + ") - "+listaTitulos.get(i));
             }
@@ -81,7 +84,7 @@ public class MenuFilme {
                 contador++;
             }
         }
-
+        sessoesFiltradas.sort(Comparator.comparing(Sessao::getHorario));
 
 
 

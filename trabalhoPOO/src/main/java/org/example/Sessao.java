@@ -5,8 +5,9 @@
 
 package org.example;
 
+import org.example.classe.Filme;
+
 import java.time.LocalTime;
-import java.util.Date;
 
 public class Sessao extends Filme {
     private LocalTime horario;

@@ -2,6 +2,7 @@ package org.example;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class SessoesService {
@@ -33,6 +34,7 @@ public class SessoesService {
         sessoes.add(new Sessao("Homem com h","Drama","130 min","16 anos",LocalTime.of(21,30), "2B",28.90,20));
         sessoes.add(new Sessao("Homem com h","Drama","130 min","16 anos",LocalTime.of(23,30), "2B",28.90,20));
 
+        sessoes.sort(Comparator.comparing(Sessao::getHorario));
         return sessoes;
     }
 
