@@ -9,15 +9,15 @@ CEP: 89111-009
 =============================================
                  INGRESSO                   
 =============================================
-Filme: Como Treinar o Seu Dragão
-Horário da Sessão: 16:15
-Sala: 3C
-Qtd ingressos: 6
-Forma de pagamento: dinheiro
-Valor total: R$ 190,74
-Data da compra: 03/07/2025 20:46:27
+Filme: Bailarina
+Horário da Sessão: 20:15
+Sala: 1A
+Qtd ingressos: 3
+Forma de pagamento: cartaoDebito
+Valor total: R$ 95,37
+Data da compra: 04/07/2025 00:32:33
 ---------------------------------------------
-Cliente: maria
-Email: 258
-CPF: 123654789
+Cliente: hfdadh hgeshr
+Email: dhdhd@fgshfdj
+CPF: fd123654789
 =============================================

@@ -50,12 +50,5 @@ public class Filme {
         this.classificacao = classificacao;
     }
 
-    public void exibirInfo(){
-        System.out.println("-----------------------INFORMAÇÕES DO FILME -----------------------");
-        System.out.println("Título: " + this.titulo);
-        System.out.println("Gênero: " + this.genero);
-        System.out.println("Classificação: " + this.classificacao);
-        System.out.println("Duração: " + this.duracao);
-        System.out.println("----------------------------------------------");
-    }
+
 }
